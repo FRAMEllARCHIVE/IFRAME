@@ -24,5 +24,13 @@
 </head>
 <body>
     <iframe id="websiteContainer" src="https://framellarchive.github.io/LVL1/" frameborder="0"></iframe>
+
+    <script>
+        window.addEventListener('message', function(event) {
+            if (event.data === 'navigateToLVL2') {
+                window.location.href = "https://framellarchive.github.io/LVL2/";
+            }
+        });
+    </script>
 </body>
 </html>
