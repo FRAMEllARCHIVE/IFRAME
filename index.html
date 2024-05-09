@@ -34,20 +34,22 @@
     <iframe id="websiteContainer" src="https://framellarchive.github.io/LVL1/" frameborder="0"></iframe>
 
 <script>
-    var iframe = document.getElementById('websiteContainer');
+    let LVL2 = false;
+
     window.addEventListener('message', function(event) {
+        if (event.origin === "https://framellarchive.github.io/IFRAME/") {
+            if (event.data === 'setLVL2') {
+                LVL2 = !LVL2;
+            }
+        }
+
+        var iframe = document.getElementById('websiteContainer');
         if (event.data === 'navigateToLVL2') {
             iframe.src = "https://framellarchive.github.io/LVL2/";
+            LVL2 = true;
         }
         if (event.data === 'navigateToLVL1') {
             iframe.src = "https://framellarchive.github.io/LVL1/";
-            iframe.onload = function() {
-                iframe.contentWindow.postMessage('cameFromLVL2', '*');
-            };
-        }
-        if (event.data === 'reset') {
-            // Handle the reset to ensure direct navigation is treated properly
-            // Maybe clear specific session flags or variables here
         }
     });
 </script>
