@@ -19,21 +19,31 @@
             width: 100%;
             height: 100%;
             border: none;
+            background-color: black;
         }
     </style>
 </head>
 <body>
     <iframe id="websiteContainer" src="https://framellarchive.github.io/LVL1/" frameborder="0"></iframe>
 
-    <script>
-        window.addEventListener('message', function(event) {
-            if (event.data === 'navigateToLVL2') {
-                document.getElementById('websiteContainer').src = "https://framellarchive.github.io/LVL2/";
-            }
-            if (event.data === 'navigateToLVL1') {
-                document.getElementById('websiteContainer').src = "https://framellarchive.github.io/LVL1/";
-            }
-        });
-    </script>
+<script>
+    var iframe = document.getElementById('websiteContainer');
+    window.addEventListener('message', function(event) {
+        if (event.data === 'navigateToLVL2') {
+            iframe.src = "https://framellarchive.github.io/LVL2/";
+        }
+        if (event.data === 'navigateToLVL1') {
+            iframe.src = "https://framellarchive.github.io/LVL1/";
+            iframe.onload = function() {
+                iframe.contentWindow.postMessage('cameFromLVL2', '*');
+            };
+        }
+        if (event.data === 'reset') {
+            // Handle the reset to ensure direct navigation is treated properly
+            // Maybe clear specific session flags or variables here
+        }
+    });
+</script>
+
 </body>
 </html>
