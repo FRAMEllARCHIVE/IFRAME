@@ -10,30 +10,19 @@
             padding: 0;
             height: 100%;
             overflow: hidden;
-            background-color: black;
         }
 
         #websiteContainer {
-            width: 100vw;
-            height: 100vh;
-            max-width: 100vh;
-            max-height: 100vw;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: black;
-            transition: opacity 1.1s ease-in-out;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
         }
     </style>
 </head>
 <body>
-    <iframe id="websiteContainer" src="https://framellarchive.github.io/LVL1/" frameborder="0"></iframe>
-
-<script>
     <iframe id="websiteContainer" src="https://framellarchive.github.io/LVL1/" frameborder="0"></iframe>
 
     <script>
@@ -45,7 +34,6 @@
                 document.getElementById('websiteContainer').src = "https://framellarchive.github.io/LVL1/";
             }
         });
-</script>
-
+    </script>
 </body>
 </html>
