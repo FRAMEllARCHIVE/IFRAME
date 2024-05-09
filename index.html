@@ -28,10 +28,10 @@
     <script>
         window.addEventListener('message', function(event) {
             if (event.data === 'navigateToLVL2') {
-                window.location.href = "https://framellarchive.github.io/LVL2/";
+                document.getElementById('websiteContainer').src = "https://framellarchive.github.io/LVL2/";
             }
             if (event.data === 'navigateToLVL1') {
-                window.location.href = "https://framellarchive.github.io/LVL1/";
+                document.getElementById('websiteContainer').src = "https://framellarchive.github.io/LVL1/";
             }
         });
     </script>
