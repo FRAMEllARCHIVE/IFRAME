@@ -42,18 +42,17 @@ window.addEventListener('message', function(event) {
         if (levelMatch) {
             LVL = parseInt(levelMatch[1]);
         }
-    }
-});
-
+        
         var iframe = document.getElementById('websiteContainer');
         if (event.data === 'navigateToLVL2') {
             iframe.src = "https://framellarchive.github.io/LVL2/";
-            LVL2 = true;
+            LVL = 2;
         }
         if (event.data === 'navigateToLVL1') {
             iframe.src = "https://framellarchive.github.io/LVL1/";
         }
-    });
+    }
+});
 </script>
 
 </body>
