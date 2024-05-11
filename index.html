@@ -34,7 +34,16 @@
     <iframe id="websiteContainer" src="https://framellarchive.github.io/LVL1/" frameborder="0"></iframe>
 
     <script>
+
+        let LVL = 1;
+
         window.addEventListener('message', function(event) {
+            if (event.data.startsWith('SETLVL')) {
+                const level = parseInt(event.data.slice(6), 10);
+                if (!isNaN(level)) {
+                    LVL = level;
+                }
+            }
             if (event.data === 'navigateToLVL2') {
                 document.getElementById('websiteContainer').src = "https://framellarchive.github.io/LVL2/";
             }
