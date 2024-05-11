@@ -35,6 +35,19 @@
 
     <script>
 
+if (screen.orientation) {
+    screen.orientation.lock('portrait')
+        .then(function success() {
+            console.log('Orientation locked');
+        })
+        .catch(function error(err) {
+            console.error('Error locking orientation: ', err);
+        });
+} else {
+    console.warn('Screen orientation API not supported');
+}
+
+        
         let LVL = 1;
 
         window.addEventListener('message', function(event) {
