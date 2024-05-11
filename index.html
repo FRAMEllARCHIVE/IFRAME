@@ -34,19 +34,6 @@
     <iframe id="websiteContainer" src="https://framellarchive.github.io/LVL1/" frameborder="0"></iframe>
 
     <script>
-
-if (screen.orientation) {
-    screen.orientation.lock('portrait')
-        .then(function success() {
-            console.log('Orientation locked');
-        })
-        .catch(function error(err) {
-            console.error('Error locking orientation: ', err);
-        });
-} else {
-    console.warn('Screen orientation API not supported');
-}
-
         
         let LVL = 1;
 
