@@ -73,7 +73,7 @@
             for (let i = 0; i < 9; i++) {
                 const heart = document.createElement('div');
                 heart.className = 'heart';
-                heart.innerHTML = i < LIVES ? filledHeartSVG : emptyHeartSVG;
+                heart.innerHTML = i < LIVES ? emptyHeartSVG : filledHeartSVG;
                 container.appendChild(heart);
             }
         }
