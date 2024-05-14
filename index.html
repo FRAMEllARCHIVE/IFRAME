@@ -52,27 +52,26 @@
     <iframe id="websiteContainer" src="" frameborder="0"></iframe>
     <div id="heartContainer"></div>
 
-    <!-- SVG Definitions -->
-    <svg id="filledHeart" viewBox="0 0 595.3 841.9" style="display:none">
-        <path fill="#E52421" d="M-2116.1,88V46h-42V4h-42h-42v42h-42v42h-42h-42V46h-42V4h-42h-42v42h-42v42h-42v42v42v42h42v42h42v42h42v42h42
-	v42h42v42h42h42v-42h42v-42h42v-42h42v-42h42v-42h42v-42v-42V88H-2116.1z M-2116.1,172h-42v42h-42v42h-42v42h-42v42h-42h-42v-42h-42
-	v-42h-42v-42h-42v-42h-42v-42h42V88h42h42v42h42v42h42h42v-42h42V88h42h42v42h42V172z"/>
-    </svg>
-    <svg id="emptyHeart" viewBox="0 0 595.3 841.9" style="display:none">
-        <path fill="#E52421" d="M-1012.4,88V46h-42V4h-42h-42v42h-42v42h-42h-42V46h-42V4h-42h-42v42h-42v42h-42v42v42v42h42v42h42v42h42v42h42
-	v42h42v42h42h42v-42h42v-42h42v-42h42v-42h42v-42h42v-42v-42V88H-1012.4z"/>
-    </svg>
-
     <script>
         let LIVES = parseInt(localStorage.getItem('LIVES')) || 9;
         let LVL = parseInt(localStorage.getItem('LVL')) || 1;
 
+        const filledHeartSVG = `
+            <svg viewBox="0 0 595.3 841.9">
+                <path fill="#E52421" d="M-2116.1,88V46h-42V4h-42h-42v42h-42v42h-42h-42V46h-42V4h-42h-42v42h-42v42h-42v42v42v42h42v42h42v42h42v42h42
+                    v42h42v42h42h42v-42h42v-42h42v-42h42v-42h42v-42h42v-42v-42V88H-2116.1z M-2116.1,172h-42v42h-42v42h-42v42h-42v42h-42h-42v-42h-42
+                    v-42h-42v-42h-42v-42h-42v-42h42V88h42h42v42h42v42h42h42v-42h42V88h42h42v42h42V172z"/>
+            </svg>`;
+        
+        const emptyHeartSVG = `
+            <svg viewBox="0 0 595.3 841.9">
+                <path fill="#E52421" d="M-1012.4,88V46h-42V4h-42h-42v42h-42v42h-42h-42V46h-42V4h-42h-42v42h-42v42h-42v42v42v42h42v42h42v42h42v42h42
+                    v42h42v42h42h42v-42h42v-42h42v-42h42v-42h42v-42h42v-42v-42V88H-1012.4z"/>
+            </svg>`;
+
         function updateHearts() {
             const container = document.getElementById('heartContainer');
             container.innerHTML = '';
-
-            const filledHeartSVG = document.getElementById('filledHeart').outerHTML;
-            const emptyHeartSVG = document.getElementById('emptyHeart').outerHTML;
 
             for (let i = 0; i < 9; i++) {
                 const heart = document.createElement('div');
