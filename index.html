@@ -28,29 +28,70 @@
             transform: translate(-50%, -50%);
             background-color: black;
         }
+
+    #heartContainer {
+        position: absolute;
+        top: 10px;
+        right: 22px;
+        font-size: 24px;
+    }
+
+    .heart {
+    }
+
     </style>
 </head>
 <body>
-    <iframe id="websiteContainer" src="https://framellarchive.github.io/LVL1/" frameborder="0"></iframe>
-
+    <iframe id="websiteContainer" src="" frameborder="0"></iframe>
+<div id="heartContainer"></div>
     <script>
-        
-        let LVL = 1;
 
-        window.addEventListener('message', function(event) {
-            if (event.data.startsWith('SETLVL')) {
-                const level = parseInt(event.data.slice(6), 10);
-                if (!isNaN(level)) {
-                    LVL = level;
-                }
+        let LIVES = parseInt(localStorage.getItem('LIVES')) || 9;
+
+        let LVL = parseInt(localStorage.getItem('LVL')) || 1;
+
+function updateHearts() {
+        const container = document.getElementById('heartContainer');
+        container.innerHTML = '';
+        for (let i = 0; i < LIVES; i++) {
+            const heart = document.createElement('span');
+            heart.className = 'heart';
+            heart.textContent = '♡';
+            container.appendChild(heart);
+        }
+    }
+
+        if (LVL === 1) {
+            document.getElementById('websiteContainer').src = "https://framellarchive.github.io/LVL1/";
+        } else if (LVL === 2) {
+            document.getElementById('websiteContainer').src = "https://framellarchive.github.io/LVL2/";
+        }
+
+    window.addEventListener('message', function(event) {
+        if (event.data.startsWith('SETLVL')) {
+            const level = parseInt(event.data.slice(6), 10);
+            if (!isNaN(level)) {
+                LVL = level;
+                localStorage.setItem('LVL', LVL);
             }
-            if (event.data === 'navigateToLVL2') {
-                document.getElementById('websiteContainer').src = "https://framellarchive.github.io/LVL2/";
+        }
+        if (event.data === 'navigateToLVL2') {
+            document.getElementById('websiteContainer').src = "https://framellarchive.github.io/LVL2/";
+        }
+        if (event.data === 'navigateToLVL1') {
+            document.getElementById('websiteContainer').src = "https://framellarchive.github.io/LVL1/";
+        }
+        if (event.data.startsWith('SETLIVES')) {
+            const lives = parseInt(event.data.slice(8), 10);
+            if (!isNaN(lives)) {
+                LIVES = lives;
+                localStorage.setItem('LIVES', LIVES);
+                updateHearts();
             }
-            if (event.data === 'navigateToLVL1') {
-                document.getElementById('websiteContainer').src = "https://framellarchive.github.io/LVL1/";
-            }
-        });
+        }
+    });
+
+    updateHearts();
     </script>
 </body>
 </html>
