@@ -51,15 +51,16 @@
         let LVL = parseInt(localStorage.getItem('LVL')) || 1;
 
 function updateHearts() {
-        const container = document.getElementById('heartContainer');
-        container.innerHTML = '';
-        for (let i = 0; i < LIVES; i++) {
-            const heart = document.createElement('span');
-            heart.className = 'heart';
-            heart.textContent = '♡';
-            container.appendChild(heart);
-        }
+    const container = document.getElementById('heartContainer');
+    container.innerHTML = '';
+    for (let i = 0; i < LIVES; i++) {
+        const heart = document.createElement('span');
+        heart.className = 'heart';
+        heart.textContent = '♡';
+        container.appendChild(heart);
     }
+}
+
 
         if (LVL === 1) {
             document.getElementById('websiteContainer').src = "https://framellarchive.github.io/LVL1/";
@@ -81,16 +82,17 @@ function updateHearts() {
         if (event.data === 'navigateToLVL1') {
             document.getElementById('websiteContainer').src = "https://framellarchive.github.io/LVL1/";
         }
-        if (event.data.startsWith('SETLIVES')) {
-            const lives = parseInt(event.data.slice(8), 10);
-            if (!isNaN(lives)) {
-                LIVES = lives;
-                localStorage.setItem('LIVES', LIVES);
-                updateHearts();
-            }
-        }
-    });
-
+    if (event.data === 'PLUSLIFE') {
+        LIVES++;
+        localStorage.setItem('LIVES', LIVES);
+        updateHearts();
+    }
+    if (event.data === 'LOSELIFE') {
+        LIVES--;
+        localStorage.setItem('LIVES', LIVES);
+        updateHearts();
+    }
+});
     updateHearts();
     </script>
 </body>
