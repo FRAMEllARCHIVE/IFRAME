@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, orientation=portrait">
     <title>PONDER</title>
     <style>
-
         body, html {
             margin: 0;
             padding: 0;
@@ -29,39 +28,39 @@
             background-color: black;
         }
 
-    #heartContainer {
-        position: absolute;
-        top: 10px;
-        left: 22px;
-        font-size: 24px;
-    }
+        #heartContainer {
+            position: absolute;
+            top: 10px;
+            left: 22px;
+            font-size: 24px;
+        }
 
-    .heart {
-        color: red; /* color of the hearts */
-    }
-
+        .heart {
+            color: red; /* color of the hearts */
+        }
     </style>
 </head>
 <body>
     <iframe id="websiteContainer" src="" frameborder="0"></iframe>
-<div id="heartContainer"></div>
+    <div id="heartContainer"></div>
     <script>
-
         let LIVES = parseInt(localStorage.getItem('LIVES')) || 9;
-
         let LVL = parseInt(localStorage.getItem('LVL')) || 1;
 
-function updateHearts() {
-    const container = document.getElementById('heartContainer');
-    container.innerHTML = '';
-    for (let i = 0; i < LIVES; i++) {
-        const heart = document.createElement('span');
-        heart.className = 'heart';
-        heart.textContent = '♡';
-        container.appendChild(heart);
-    }
-}
-
+        function updateHearts() {
+            const container = document.getElementById('heartContainer');
+            container.innerHTML = '';
+            for (let i = 0; i < 9; i++) {
+                const heart = document.createElement('span');
+                heart.className = 'heart';
+                if (i < LIVES) {
+                    heart.textContent = '❤';
+                } else {
+                    heart.textContent = '♡';
+                }
+                container.appendChild(heart);
+            }
+        }
 
         if (LVL === 1) {
             document.getElementById('websiteContainer').src = "https://framellarchive.github.io/LVL1/";
@@ -69,32 +68,38 @@ function updateHearts() {
             document.getElementById('websiteContainer').src = "https://framellarchive.github.io/LVL2/";
         }
 
-    window.addEventListener('message', function(event) {
-        if (event.data.startsWith('SETLVL')) {
-            const level = parseInt(event.data.slice(6), 10);
-            if (!isNaN(level)) {
-                LVL = level;
-                localStorage.setItem('LVL', LVL);
+        window.addEventListener('message', function(event) {
+            if (event.data.startsWith('SETLVL')) {
+                const level = parseInt(event.data.slice(6), 10);
+                if (!isNaN(level)) {
+                    LVL = level;
+                    localStorage.setItem('LVL', LVL);
+                }
             }
-        }
-        if (event.data === 'navigateToLVL2') {
-            document.getElementById('websiteContainer').src = "https://framellarchive.github.io/LVL2/";
-        }
-        if (event.data === 'navigateToLVL1') {
-            document.getElementById('websiteContainer').src = "https://framellarchive.github.io/LVL1/";
-        }
-    if (event.data === 'PLUSLIFE') {
-        LIVES++;
-        localStorage.setItem('LIVES', LIVES);
+            if (event.data === 'navigateToLVL2') {
+                document.getElementById('websiteContainer').src = "https://framellarchive.github.io/LVL2/";
+            }
+            if (event.data === 'navigateToLVL1') {
+                document.getElementById('websiteContainer').src = "https://framellarchive.github.io/LVL1/";
+            }
+            if (event.data === 'PLUSLIFE') {
+                LIVES++;
+                if (LIVES > 9) {
+                    LIVES = 9;
+                }
+                localStorage.setItem('LIVES', LIVES);
+                updateHearts();
+            }
+            if (event.data === 'LOSELIFE') {
+                LIVES--;
+                if (LIVES < 0) {
+                    LIVES = 0;
+                }
+                localStorage.setItem('LIVES', LIVES);
+                updateHearts();
+            }
+        });
         updateHearts();
-    }
-    if (event.data === 'LOSELIFE') {
-        LIVES--;
-        localStorage.setItem('LIVES', LIVES);
-        updateHearts();
-    }
-});
-    updateHearts();
     </script>
 </body>
 </html>
