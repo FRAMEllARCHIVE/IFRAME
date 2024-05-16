@@ -117,6 +117,9 @@
                 localStorage.setItem('LIVES', LIVES);
                 updateHearts();
             }
+            if (event.data === 'ITEM1') {
+                localStorage.setItem('ITEM1', OBTAINED);
+            }            
         });
 
         updateHearts();
