@@ -110,9 +110,13 @@ if (event.data.startsWith('SETLVL')) {
                 }
             }
 
-if (event.data === 'navigateToLVL$') {
-                document.getElementById('websiteContainer').src = "https://framellarchive.github.io/LVL$/";
-                }
+if (event.data.startsWith('navigateToLVL')) {
+        const level = parseInt(event.data.slice(13), 10);
+        if (!isNaN(level)) {
+            const url = `https://framellarchive.github.io/LVL${level}/`;
+            document.getElementById('websiteContainer').src = url;
+        }
+    }
 
 if (event.data.startsWith('LIFE')) {
         const action = event.data.slice(4);
