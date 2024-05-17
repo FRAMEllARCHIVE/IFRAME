@@ -13,7 +13,7 @@
             background-color: black;
         }
 
-        #websiteContainer {
+        #websiteContainer, #preloadContainer {
             width: 100vw;
             height: 100vh;
             max-width: 100vh;
@@ -26,6 +26,10 @@
             left: 50%;
             transform: translate(-50%, -50%);
             background-color: black;
+        }
+
+        #preloadContainer {
+            visibility: hidden;
         }
 
         #heartContainer {
@@ -50,12 +54,30 @@
 </head>
 <body>
     <iframe id="websiteContainer" src="" frameborder="0"></iframe>
+    <iframe id="preloadContainer" src="" frameborder="0"></iframe>
     <div id="heartContainer"></div>
-
     <script>
-        let LIVES = parseInt(localStorage.getItem('LIVES')) || 3;
-        let LVL = parseInt(localStorage.getItem('LVL')) || 1;
 
+let LIVES = parseInt(localStorage.getItem('LIVES')) || 3;
+let LVL = parseInt(localStorage.getItem('LVL')) || 1;
+
+
+const levelURLs = {
+    1: "https://framellarchive.github.io/LVL1/",
+    2: "https://framellarchive.github.io/LVL2/",
+    3: "https://framellarchive.github.io/LVL3/"
+};
+
+function loadLevel(level) {
+    const currentLevel = document.getElementById('websiteContainer');
+    currentLevel.src = levelURLs[level];
+
+    const nextLevel = level + 1;
+    if (levelURLs[nextLevel]) {
+        const preloadLevel = document.getElementById('preloadContainer');
+        preloadLevel.src = levelURLs[nextLevel];
+    }
+}
         const filledHeartSVG = `
             <svg viewBox="0 0 138.4 115.33">
                 <path fill="#E52421" d="M355.32,386.35V374.82H343.78V363.28H320.72v11.54H309.18v11.53H286.12V374.82H274.58V363.28H251.52v11.54H240v11.53H228.45V421H240v11.53h11.54V444h11.53v11.53h11.53v11.53h11.54v11.54h23.06V467.08h11.54V455.55h11.53V444h11.53V432.48h11.54V421h11.53v-34.6Z" transform="translate(-228.45 -363.28)"/>
@@ -66,7 +88,7 @@
                 <path fill="#A52A2A" opacity="0.5" d="M355.32,386.35V374.82H343.78V363.28H320.72v11.54H309.18v11.53H286.12V374.82H274.58V363.28H251.52v11.54H240v11.53H228.45V421H240v11.53h11.54V444h11.53v11.53h11.53v11.53h11.54v11.54h23.06V467.08h11.54V455.55h11.53V444h11.53V432.48h11.54V421h11.53v-34.6Zm0,23.07H343.78V421H332.25v11.53H320.72V444H309.18v11.53H286.12V444H274.58V432.48H263.05V421H251.52V409.42H240V397.88h11.54V386.35h23.06v11.53h11.54v11.54h23.06V397.88h11.54V386.35h23.06v11.53h11.54Z" transform="translate(-228.45 -363.28)"/>
             </svg>`;
 
-        function updateHearts() {
+function updateHearts() {
             const container = document.getElementById('heartContainer');
             container.innerHTML = '';
 
@@ -76,13 +98,10 @@
                 heart.innerHTML = i < (9 - LIVES) ? emptyHeartSVG : filledHeartSVG;
                 container.appendChild(heart);
             }
-        }
+}
 
-        if (LVL === 1) {
-            document.getElementById('websiteContainer').src = "https://framellarchive.github.io/LVL1/";
-        } else if (LVL === 2) {
-            document.getElementById('websiteContainer').src = "https://framellarchive.github.io/LVL2/";
-        }
+document.getElementById('websiteContainer').src = `https://framellarchive.github.io/LVL${LVL}/`;
+
 
         window.addEventListener('message', function(event) {
             if (event.data.startsWith('SETLVL')) {
@@ -90,6 +109,7 @@
                 if (!isNaN(level)) {
                     LVL = level;
                     localStorage.setItem('LVL', LVL);
+                    loadLevel(LVL);
                 }
             }
             if (event.data === 'navigateToLVL2') {
