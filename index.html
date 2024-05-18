@@ -29,7 +29,7 @@
         }
 
         #preloadNextContainer, #preloadPrevContainer {
-            visibility: hidden;
+            display: none;
         }
 
         #heartContainer {
@@ -52,6 +52,9 @@
         }
 
 </style>
+    <link rel="preload" href="https://framellarchive.github.io/LVL1/" as="document">
+    <link rel="preload" href="https://framellarchive.github.io/LVL2/" as="document">
+    <link rel="preload" href="https://framellarchive.github.io/LVL3/" as="document">
 </head>
 <body>
 
@@ -119,19 +122,13 @@ if (event.data.startsWith('navigateToLVL')) {
     }
 
 if (event.data.startsWith('LIFE')) {
-        const action = event.data.slice(4);
-        const num = parseInt(action);
-        if (!isNaN(num)) {
-            LIVES += num;
-            if (LIVES < 0) {
-                LIVES = 0;
-            } else if (LIVES > 9) {
-                LIVES = 9;
+            const num = parseInt(event.data.slice(4), 10);
+            if (!isNaN(num)) {
+                LIVES = Math.max(0, Math.min(LIVES + num, 9));
+                localStorage.setItem('LIVES', LIVES);
+                updateHearts();
             }
-            localStorage.setItem('LIVES', LIVES);
-            updateHearts();
         }
-    }
 
 if (event.data.startsWith('ITEM')) {
         const itemName = event.data;
@@ -139,7 +136,7 @@ if (event.data.startsWith('ITEM')) {
     }
 
 });
-
+loadLevel(LVL);
 updateHearts();
 
     </script>
