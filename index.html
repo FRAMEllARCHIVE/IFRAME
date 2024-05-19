@@ -88,16 +88,21 @@ const emptyHeartSVG = `
             </svg>`;
 
 function updateHearts() {
-            const container = document.getElementById('heartContainer');
-            container.innerHTML = '';
+    const container = document.getElementById('heartContainer');
+    container.innerHTML = '';
 
-            for (let i = 0; i < 9; i++) {
-                const heart = document.createElement('div');
-                heart.className = 'heart';
-                heart.innerHTML = i < (9 - LIVES) ? emptyHeartSVG : filledHeartSVG;
-                container.appendChild(heart);
-            }
+    for (let i = 0; i < 9; i++) {
+        const heart = document.createElement('div');
+        heart.className = 'heart';
+        heart.innerHTML = i < (9 - LIVES) ? emptyHeartSVG : filledHeartSVG;
+        container.appendChild(heart);
+    }
+
+    if (LIVES === 0) {
+        localStorage.clear();
+    }
 }
+
 
 window.addEventListener('message', function(event) {
 
