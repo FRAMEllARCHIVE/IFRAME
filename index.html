@@ -79,13 +79,13 @@
 <div id="heartContainer"></div>
 
 <div class="button-container">
-    <button class="button" onclick="lose life()"></button>
+    <button class="button" onclick="loselife()"></button>
     <button class="button" onclick="resetaxis()"></button>
 </div>
 
 <script>
 
-function lose life() {
+function loselife() {
     window.parent.postMessage('LIFE-1', '*');
     }
 function resetaxis() {
