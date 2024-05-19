@@ -79,11 +79,17 @@
 <div id="heartContainer"></div>
 
 <div class="button-container">
-    <button class="button" onclick="goToNextLevel()">Next Level</button>
-    <button class="button" onclick="goToPreviousLevel()">Previous Level</button>
+    <button class="button" onclick="lose life()"></button>
+    <button class="button" onclick="resetaxis()"></button>
 </div>
 
 <script>
+
+function lose life() {
+    window.parent.postMessage('LIFE-1', '*');
+    }
+function resetaxis() {
+    }
 
 let LIVES = parseInt(localStorage.getItem('LIVES')) || 3;
 let LVL = parseInt(localStorage.getItem('LVL')) || 1;
