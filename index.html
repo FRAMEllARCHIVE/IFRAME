@@ -62,7 +62,6 @@
 
 let LIVES = parseInt(localStorage.getItem('LIVES')) || 3;
 let LVL = parseInt(localStorage.getItem('LVL')) || 1;
-    console.log('Initial LVL:', LVL);
 
 document.getElementById('websiteContainer').src = `https://framellarchive.github.io/LVL${LVL}/`;
 
@@ -110,7 +109,7 @@ function updateHearts() {
 
 
 window.addEventListener('message', function(event) {
-    console.log('Incoming message:', event.data);
+
 if (event.data.startsWith('SETLVL')) {
                 const level = parseInt(event.data.slice(6), 10);
                 if (!isNaN(level)) {
