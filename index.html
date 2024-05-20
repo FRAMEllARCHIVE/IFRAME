@@ -72,11 +72,16 @@ document.getElementById('websiteContainer').src = `https://framellarchive.github
 
 function loadLevel(level) {
     const preloadNextLevel = document.getElementById('preloadNextContainer');
-    preloadNextLevel.removeAttribute('src'); // Remove src attribute
+    preloadNextLevel.src = `https://framellarchive.github.io/LVL${level + 1}/`;
+    preloadNextLevel.setAttribute('sandbox', 'allow-same-origin');
 
+    // Ensure that level - 1 is not negative
+    const prevLevel = Math.max(level - 1, 1);
     const preloadPrevLevel = document.getElementById('preloadPrevContainer');
-    preloadPrevLevel.removeAttribute('src'); // Remove src attribute
+    preloadPrevLevel.src = `https://framellarchive.github.io/LVL${prevLevel}/`;
+    preloadPrevLevel.setAttribute('sandbox', 'allow-same-origin');
 }
+
 
 
 
