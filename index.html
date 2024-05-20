@@ -70,32 +70,28 @@ let LVL = parseInt(localStorage.getItem('LVL')) || 1;
 
 document.getElementById('websiteContainer').src = `https://framellarchive.github.io/LVL${LVL}/`;
 
-function loadLevel(level) {
-    // URLs of the level pages
-    const nextLevelURL = `https://framellarchive.github.io/LVL${level + 1}/`;
-    const prevLevelURL = `https://framellarchive.github.io/LVL${Math.max(level - 1, 1)}/`;
+async function loadLevel(level) {
+    try {
+        // Fetch the content of the next level
+        const nextLevelResponse = await fetch(`https://framellarchive.github.io/LVL${level + 1}/`);
+        const nextLevelHTML = await nextLevelResponse.text();
 
-    // Fetch the content of the level pages
-    fetch(nextLevelURL)
-        .then(response => response.text())
-        .then(html => {
-            const preloadNextLevel = document.getElementById('preloadNextContainer');
-            preloadNextLevel.removeAttribute('sandbox'); // Remove sandbox attribute
-            preloadNextLevel.contentWindow.document.open();
-            preloadNextLevel.contentWindow.document.write(html);
-            preloadNextLevel.contentWindow.document.close();
-        });
+        // Fetch the content of the previous level
+        const prevLevel = Math.max(level - 1, 1);
+        const prevLevelResponse = await fetch(`https://framellarchive.github.io/LVL${prevLevel}/`);
+        const prevLevelHTML = await prevLevelResponse.text();
 
-    fetch(prevLevelURL)
-        .then(response => response.text())
-        .then(html => {
-            const preloadPrevLevel = document.getElementById('preloadPrevContainer');
-            preloadPrevLevel.removeAttribute('sandbox'); // Remove sandbox attribute
-            preloadPrevLevel.contentWindow.document.open();
-            preloadPrevLevel.contentWindow.document.write(html);
-            preloadPrevLevel.contentWindow.document.close();
-        });
+        // Now you have the HTML content of the next and previous levels
+        // You can use this content as needed, e.g., to display previews or for preloading purposes
+        console.log(nextLevelHTML);
+        console.log(prevLevelHTML);
+
+        // Optionally, you can inject this HTML into your page or use it in any other way you need
+    } catch (error) {
+        console.error('Error loading level:', error);
+    }
 }
+
 
 const filledHeartSVG = `
             <svg viewBox="0 0 138.4 115.33">
