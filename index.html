@@ -74,9 +74,11 @@ function loadLevel(level) {
     const preloadNextLevel = document.getElementById('preloadNextContainer');
     preloadNextLevel.src = `https://framellarchive.github.io/LVL${level + 1}/`;
 
+    const prevLevel = Math.max(level - 1, 1);
     const preloadPrevLevel = document.getElementById('preloadPrevContainer');
-    preloadPrevLevel.src = `https://framellarchive.github.io/LVL${level - 1}/`;
+    preloadPrevLevel.src = `https://framellarchive.github.io/LVL${prevLevel}/`;
 }
+
 
 const filledHeartSVG = `
             <svg viewBox="0 0 138.4 115.33">
