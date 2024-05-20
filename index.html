@@ -106,7 +106,7 @@ function updateHearts() {
 
 
 window.addEventListener('message', function(event) {
-
+    console.log('Incoming message:', event.data);
 if (event.data.startsWith('SETLVL')) {
                 const level = parseInt(event.data.slice(6), 10);
                 if (!isNaN(level)) {
