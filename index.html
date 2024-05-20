@@ -13,7 +13,7 @@
             background-color: black;
         }
 
-        #websiteContainer, #preloadNextContainer, #preloadPrevContainer {
+        #websiteContainer {
             width: 100vw;
             height: 100vh;
             max-width: 100vh;
@@ -26,10 +26,6 @@
             left: 50%;
             transform: translate(-50%, -50%);
             background-color: black;
-        }
-
-        #preloadNextContainer, #preloadPrevContainer {
-            display: none;
         }
 
         #heartContainer {
@@ -74,16 +70,15 @@ function loadLevel(level) {
     const preloadNextLevel = document.createElement('iframe');
     preloadNextLevel.src = `https://framellarchive.github.io/LVL${level + 1}/`;
     preloadNextLevel.setAttribute('sandbox', 'allow-same-origin');
-    preloadNextLevel.style.display = 'none'; // Hide the iframe
-    document.body.appendChild(preloadNextLevel); // Append the iframe to the document body to trigger loading
+    preloadNextLevel.style.display = 'none';
+    document.body.appendChild(preloadNextLevel);
 
-    // Ensure that level - 1 is not negative
     const prevLevel = Math.max(level - 1, 1);
     const preloadPrevLevel = document.createElement('iframe');
     preloadPrevLevel.src = `https://framellarchive.github.io/LVL${prevLevel}/`;
     preloadPrevLevel.setAttribute('sandbox', 'allow-same-origin');
-    preloadPrevLevel.style.display = 'none'; // Hide the iframe
-    document.body.appendChild(preloadPrevLevel); // Append the iframe to the document body to trigger loading
+    preloadPrevLevel.style.display = 'none';
+    document.body.appendChild(preloadPrevLevel);
 }
 
 
