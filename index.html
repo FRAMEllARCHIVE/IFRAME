@@ -70,26 +70,20 @@ let LVL = parseInt(localStorage.getItem('LVL')) || 1;
 
 document.getElementById('websiteContainer').src = `https://framellarchive.github.io/LVL${LVL}/`;
 
-async function loadLevel(level) {
-    try {
-        // Fetch the content of the next level
-        const nextLevelResponse = await fetch(`https://framellarchive.github.io/LVL${level + 1}/`);
-        const nextLevelHTML = await nextLevelResponse.text();
+function loadLevel(level) {
+    const preloadNextLevel = document.createElement('iframe');
+    preloadNextLevel.src = `https://framellarchive.github.io/LVL${level + 1}/`;
+    preloadNextLevel.setAttribute('sandbox', 'allow-same-origin');
+    preloadNextLevel.style.display = 'none'; // Hide the iframe
+    document.body.appendChild(preloadNextLevel); // Append the iframe to the document body to trigger loading
 
-        // Fetch the content of the previous level
-        const prevLevel = Math.max(level - 1, 1);
-        const prevLevelResponse = await fetch(`https://framellarchive.github.io/LVL${prevLevel}/`);
-        const prevLevelHTML = await prevLevelResponse.text();
-
-        // Now you have the HTML content of the next and previous levels
-        // You can use this content as needed, e.g., to display previews or for preloading purposes
-        console.log(nextLevelHTML);
-        console.log(prevLevelHTML);
-
-        // Optionally, you can inject this HTML into your page or use it in any other way you need
-    } catch (error) {
-        console.error('Error loading level:', error);
-    }
+    // Ensure that level - 1 is not negative
+    const prevLevel = Math.max(level - 1, 1);
+    const preloadPrevLevel = document.createElement('iframe');
+    preloadPrevLevel.src = `https://framellarchive.github.io/LVL${prevLevel}/`;
+    preloadPrevLevel.setAttribute('sandbox', 'allow-same-origin');
+    preloadPrevLevel.style.display = 'none'; // Hide the iframe
+    document.body.appendChild(preloadPrevLevel); // Append the iframe to the document body to trigger loading
 }
 
 
