@@ -148,6 +148,10 @@ if (event.data.startsWith('ITEM')) {
         localStorage.setItem(itemName, 'OBTAINED');
     }
 
+if (event.data.startsWith('QUIT')) {
+window.close()
+    }
+
 });
 updateHearts();
 
