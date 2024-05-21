@@ -13,7 +13,7 @@
             background-color: black;
         }
 
-        #websiteContainer {
+        #websiteContainer, #GAMEOVER {
             width: 100vw;
             height: 100vh;
             max-width: 100vh;
@@ -28,6 +28,9 @@
             background-color: black;
         }
 
+        #GAMEOVER {
+            display: none;
+        }
 
         #heartContainer {
             position: absolute;
@@ -53,6 +56,7 @@
 <body>
 
 <iframe id="websiteContainer" src="" frameborder="0"></iframe>
+<iframe id="GAMEOVER" src="" frameborder="0" sandbox="allow-same-origin"></iframe>
 
 <div id="heartContainer"></div>
 
@@ -100,7 +104,9 @@ function updateHearts() {
     }
 
     if (LIVES === 0) {
-        localStorage.clear();
+        document.getElementById('GAMEOVER').src = `https://framellarchive.github.io/GAMEOVER/`;
+        document.getElementById('GAMEOVER').style.display = 'block';
+        document.getElementById('websiteContainer').style.display = 'none';
     }
 }
 
