@@ -106,11 +106,11 @@ function updateHearts() {
     }
 
     if (LIVES === 0) {
-        localStorage.setItem('LIVES', LIVES);
+        localStorage.setItem('LIVES', 0);
         document.getElementById('GAMEOVER').src = `https://framellarchive.github.io/GAMEOVER/`;
         document.getElementById('GAMEOVER').style.display = 'block';
         document.getElementById('websiteContainer').style.display = 'none';
-        document.getElementById('heartContainer').style.opacity = 0;
+        document.getElementById('heartContainer').style.display = 'none';
     }
 }
 
