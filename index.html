@@ -64,7 +64,7 @@
 
 <script>
 
-let LIVES = parseInt(localStorage.getItem('LIVES')) || 3;
+let LIVES = localStorage.getItem('LIVES') === null ? 3 : parseInt(localStorage.getItem('LIVES'));
 let LVL = parseInt(localStorage.getItem('LVL')) || 1;
 
 document.getElementById('websiteContainer').src = `https://framellarchive.github.io/LVL${LVL}/`;
