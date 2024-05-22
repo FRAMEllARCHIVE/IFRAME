@@ -146,9 +146,8 @@ if (event.data.startsWith('ITEM')) {
     }
 
 if (event.data.startsWith('CONTINUE')) {
-        document.getElementById('GAMEOVER').style.display = 'none';
-        document.getElementById('websiteContainer').style.display = 'block';
-        document.getElementById('heartContainer').style.opacity = 1;
+localStorage.setItem('LVL', 1);
+window.location.reload();
     }
     
 });
