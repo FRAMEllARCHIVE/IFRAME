@@ -145,6 +145,12 @@ if (event.data.startsWith('ITEM')) {
         localStorage.setItem(itemName, 'OBTAINED');
     }
 
+if (event.data.startsWith('CONTINUE')) {
+        document.getElementById('GAMEOVER').style.display = 'none';
+        document.getElementById('websiteContainer').style.display = 'block';
+        document.getElementById('heartContainer').style.opacity = 1;
+    }
+    
 });
 updateHearts();
 
